@@ -1,0 +1,29 @@
+<!--
+    Note: If you modify this file, you must restart the XL Deploy server.
+-->
+<configuration>
+    <!-- See: http://logback.qos.ch/access.html -->
+    <!-- Enable to debug configuration:
+      <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" />
+    -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>log/access.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>log/access.%d{yyyy-MM-dd}.zip</fileNamePattern>
+            <maxHistory>90</maxHistory>
+            <totalSizeCap>50MB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <!--
+              Combined Log Format
+              See: http://logback.qos.ch/manual/layouts.html#AccessPatternLayout
+            -->
+            <pattern>%h %l %u [%t] "%r" %s %b "%i{Referer}" "%i{User-Agent}"</pattern>
+            <!--
+              <pattern>combined</pattern>
+              <pattern>common</pattern>
+            -->
+        </encoder>
+    </appender>
+    <appender-ref ref="FILE" />
+</configuration>
